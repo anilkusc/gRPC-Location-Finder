@@ -1,0 +1,13 @@
+syntax = "proto3";
+package location;
+
+message Coordinates {
+  int32 x = 1;
+  int32 y = 2;
+}
+
+service LocationDelivery {
+
+    rpc Deliver (stream Coordinates) returns (stream Coordinates) {}
+
+}
