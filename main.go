@@ -13,20 +13,26 @@ import (
 type server struct{}
 
 func (s server) Deliver(stream pb.LocationDelivery_DeliverServer) error {
+	//waitc := make(chan struct{})
+	//go func() {
 	for {
 		in, err := stream.Recv()
 		if err == io.EOF {
-			return nil
+			log.Println("io failed")
 		}
 		if err != nil {
-			return err
+			log.Println("Receiving failed")
 		}
 		ip := in.Ip
 		log.Println("Client ip is:", ip)
 		if err := stream.Send(&pb.Coordinates{Ip: ip}); err != nil {
-			return err
+			log.Println("Sending failed")
 		}
+
 	}
+	//}()
+	//<-waitc
+	return nil
 }
 
 func main() {

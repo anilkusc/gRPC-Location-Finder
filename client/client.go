@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"log"
+	"time"
 
 	pb "github.com/anilkusc/gRPC-Location-Finder/protos"
 	"google.golang.org/grpc"
@@ -20,14 +21,15 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error when calling SayHello: %s", err)
 	}
-	waitc := make(chan struct{})
+	//waitc := make(chan struct{})
 	msg := &pb.Coordinates{Ip: "127.0.0.1"}
-	go func() {
-		for {
-			log.Println("Sending msg...")
-			response.Send(msg)
-		}
-	}()
-	<-waitc
+	//go func() {
+	for {
+		log.Println("Sending msg...")
+		response.Send(msg)
+		time.Sleep(5 * time.Second)
+	}
+	//}()
+	//<-waitc
 	response.CloseSend()
 }
