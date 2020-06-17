@@ -1,9 +1,11 @@
 syntax = "proto3";
-package location;
+package v1;
 
 message Coordinates {
-  int32 x = 1;
-  int32 y = 2;
+  string ip = 1;
+  int32 x = 2;
+  int32 y = 3;
+  
 }
 
 service LocationDelivery {
