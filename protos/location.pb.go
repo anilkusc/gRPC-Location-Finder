@@ -29,7 +29,7 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-type Coordinates struct {
+type Client struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -39,8 +39,8 @@ type Coordinates struct {
 	Y  int32  `protobuf:"varint,3,opt,name=y,proto3" json:"y,omitempty"`
 }
 
-func (x *Coordinates) Reset() {
-	*x = Coordinates{}
+func (x *Client) Reset() {
+	*x = Client{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_protos_location_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -48,13 +48,13 @@ func (x *Coordinates) Reset() {
 	}
 }
 
-func (x *Coordinates) String() string {
+func (x *Client) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Coordinates) ProtoMessage() {}
+func (*Client) ProtoMessage() {}
 
-func (x *Coordinates) ProtoReflect() protoreflect.Message {
+func (x *Client) ProtoReflect() protoreflect.Message {
 	mi := &file_protos_location_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -66,26 +66,26 @@ func (x *Coordinates) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Coordinates.ProtoReflect.Descriptor instead.
-func (*Coordinates) Descriptor() ([]byte, []int) {
+// Deprecated: Use Client.ProtoReflect.Descriptor instead.
+func (*Client) Descriptor() ([]byte, []int) {
 	return file_protos_location_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Coordinates) GetIp() string {
+func (x *Client) GetIp() string {
 	if x != nil {
 		return x.Ip
 	}
 	return ""
 }
 
-func (x *Coordinates) GetX() int32 {
+func (x *Client) GetX() int32 {
 	if x != nil {
 		return x.X
 	}
 	return 0
 }
 
-func (x *Coordinates) GetY() int32 {
+func (x *Client) GetY() int32 {
 	if x != nil {
 		return x.Y
 	}
@@ -96,16 +96,15 @@ var File_protos_location_proto protoreflect.FileDescriptor
 
 var file_protos_location_proto_rawDesc = []byte{
 	0x0a, 0x15, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2f, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x02, 0x76, 0x31, 0x22, 0x39, 0x0a, 0x0b, 0x43,
-	0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x65, 0x73, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x70,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x70, 0x12, 0x0c, 0x0a, 0x01, 0x78, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x01, 0x78, 0x12, 0x0c, 0x0a, 0x01, 0x79, 0x18, 0x03, 0x20,
-	0x01, 0x28, 0x05, 0x52, 0x01, 0x79, 0x32, 0x45, 0x0a, 0x10, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x44, 0x65, 0x6c, 0x69, 0x76, 0x65, 0x72, 0x79, 0x12, 0x31, 0x0a, 0x07, 0x44, 0x65,
-	0x6c, 0x69, 0x76, 0x65, 0x72, 0x12, 0x0f, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x6f, 0x6f, 0x72, 0x64,
-	0x69, 0x6e, 0x61, 0x74, 0x65, 0x73, 0x1a, 0x0f, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x6f, 0x6f, 0x72,
-	0x64, 0x69, 0x6e, 0x61, 0x74, 0x65, 0x73, 0x22, 0x00, 0x28, 0x01, 0x30, 0x01, 0x62, 0x06, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x02, 0x76, 0x31, 0x22, 0x34, 0x0a, 0x06, 0x43,
+	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x70, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x02, 0x69, 0x70, 0x12, 0x0c, 0x0a, 0x01, 0x78, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05,
+	0x52, 0x01, 0x78, 0x12, 0x0c, 0x0a, 0x01, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x01,
+	0x79, 0x32, 0x39, 0x0a, 0x10, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x44, 0x65, 0x6c,
+	0x69, 0x76, 0x65, 0x72, 0x79, 0x12, 0x25, 0x0a, 0x07, 0x44, 0x65, 0x6c, 0x69, 0x76, 0x65, 0x72,
+	0x12, 0x0a, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x1a, 0x0a, 0x2e, 0x76,
+	0x31, 0x2e, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x22, 0x00, 0x30, 0x01, 0x62, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -122,11 +121,11 @@ func file_protos_location_proto_rawDescGZIP() []byte {
 
 var file_protos_location_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_protos_location_proto_goTypes = []interface{}{
-	(*Coordinates)(nil), // 0: v1.Coordinates
+	(*Client)(nil), // 0: v1.Client
 }
 var file_protos_location_proto_depIdxs = []int32{
-	0, // 0: v1.LocationDelivery.Deliver:input_type -> v1.Coordinates
-	0, // 1: v1.LocationDelivery.Deliver:output_type -> v1.Coordinates
+	0, // 0: v1.LocationDelivery.Deliver:input_type -> v1.Client
+	0, // 1: v1.LocationDelivery.Deliver:output_type -> v1.Client
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -141,7 +140,7 @@ func file_protos_location_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_protos_location_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Coordinates); i {
+			switch v := v.(*Client); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -185,7 +184,7 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type LocationDeliveryClient interface {
-	Deliver(ctx context.Context, opts ...grpc.CallOption) (LocationDelivery_DeliverClient, error)
+	Deliver(ctx context.Context, in *Client, opts ...grpc.CallOption) (LocationDelivery_DeliverClient, error)
 }
 
 type locationDeliveryClient struct {
@@ -196,18 +195,23 @@ func NewLocationDeliveryClient(cc grpc.ClientConnInterface) LocationDeliveryClie
 	return &locationDeliveryClient{cc}
 }
 
-func (c *locationDeliveryClient) Deliver(ctx context.Context, opts ...grpc.CallOption) (LocationDelivery_DeliverClient, error) {
+func (c *locationDeliveryClient) Deliver(ctx context.Context, in *Client, opts ...grpc.CallOption) (LocationDelivery_DeliverClient, error) {
 	stream, err := c.cc.NewStream(ctx, &_LocationDelivery_serviceDesc.Streams[0], "/v1.LocationDelivery/Deliver", opts...)
 	if err != nil {
 		return nil, err
 	}
 	x := &locationDeliveryDeliverClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
 	return x, nil
 }
 
 type LocationDelivery_DeliverClient interface {
-	Send(*Coordinates) error
-	Recv() (*Coordinates, error)
+	Recv() (*Client, error)
 	grpc.ClientStream
 }
 
@@ -215,12 +219,8 @@ type locationDeliveryDeliverClient struct {
 	grpc.ClientStream
 }
 
-func (x *locationDeliveryDeliverClient) Send(m *Coordinates) error {
-	return x.ClientStream.SendMsg(m)
-}
-
-func (x *locationDeliveryDeliverClient) Recv() (*Coordinates, error) {
-	m := new(Coordinates)
+func (x *locationDeliveryDeliverClient) Recv() (*Client, error) {
+	m := new(Client)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -229,14 +229,14 @@ func (x *locationDeliveryDeliverClient) Recv() (*Coordinates, error) {
 
 // LocationDeliveryServer is the server API for LocationDelivery service.
 type LocationDeliveryServer interface {
-	Deliver(LocationDelivery_DeliverServer) error
+	Deliver(*Client, LocationDelivery_DeliverServer) error
 }
 
 // UnimplementedLocationDeliveryServer can be embedded to have forward compatible implementations.
 type UnimplementedLocationDeliveryServer struct {
 }
 
-func (*UnimplementedLocationDeliveryServer) Deliver(LocationDelivery_DeliverServer) error {
+func (*UnimplementedLocationDeliveryServer) Deliver(*Client, LocationDelivery_DeliverServer) error {
 	return status.Errorf(codes.Unimplemented, "method Deliver not implemented")
 }
 
@@ -245,12 +245,15 @@ func RegisterLocationDeliveryServer(s *grpc.Server, srv LocationDeliveryServer) 
 }
 
 func _LocationDelivery_Deliver_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(LocationDeliveryServer).Deliver(&locationDeliveryDeliverServer{stream})
+	m := new(Client)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(LocationDeliveryServer).Deliver(m, &locationDeliveryDeliverServer{stream})
 }
 
 type LocationDelivery_DeliverServer interface {
-	Send(*Coordinates) error
-	Recv() (*Coordinates, error)
+	Send(*Client) error
 	grpc.ServerStream
 }
 
@@ -258,16 +261,8 @@ type locationDeliveryDeliverServer struct {
 	grpc.ServerStream
 }
 
-func (x *locationDeliveryDeliverServer) Send(m *Coordinates) error {
+func (x *locationDeliveryDeliverServer) Send(m *Client) error {
 	return x.ServerStream.SendMsg(m)
-}
-
-func (x *locationDeliveryDeliverServer) Recv() (*Coordinates, error) {
-	m := new(Coordinates)
-	if err := x.ServerStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
 }
 
 var _LocationDelivery_serviceDesc = grpc.ServiceDesc{
@@ -279,7 +274,6 @@ var _LocationDelivery_serviceDesc = grpc.ServiceDesc{
 			StreamName:    "Deliver",
 			Handler:       _LocationDelivery_Deliver_Handler,
 			ServerStreams: true,
-			ClientStreams: true,
 		},
 	},
 	Metadata: "protos/location.proto",

@@ -2,14 +2,33 @@ package main
 
 import (
 	"context"
+	"fmt"
+	"io"
 	"log"
-	"time"
+
+	"flag"
 
 	pb "github.com/anilkusc/gRPC-Location-Finder/protos"
 	"google.golang.org/grpc"
 )
 
+type Client struct {
+	ip string
+	x  int32
+	y  int32
+}
+
+var (
+	clients []Client
+	ip      = flag.String("ip", "192.168.1.1", "Client IP")
+	x       = flag.Int("x", 10, "Client X Coordinate")
+	y       = flag.Int("y", 10, "Client Y Coordinate")
+)
+
 func main() {
+	flag.Parse()
+	var me, others Client
+
 	var conn *grpc.ClientConn
 	conn, err := grpc.Dial(":5000", grpc.WithInsecure())
 	if err != nil {
@@ -17,19 +36,28 @@ func main() {
 	}
 	defer conn.Close()
 	c := pb.NewLocationDeliveryClient(conn)
-	response, err := c.Deliver(context.Background())
-	if err != nil {
-		log.Fatalf("Error when calling SayHello: %s", err)
-	}
-	//waitc := make(chan struct{})
-	msg := &pb.Coordinates{Ip: "127.0.0.1"}
-	//go func() {
+
+	me.ip = *ip
+	me.x = int32(*x)
+	me.y = int32(*y)
+	req := pb.Client{Ip: me.ip, X: me.x, Y: me.y}
+	stream, _ := c.Deliver(context.Background(), &req)
+	log.Printf("%s sent", req.Ip)
+	clients = nil
 	for {
-		log.Println("Sending msg...")
-		response.Send(msg)
-		time.Sleep(5 * time.Second)
+		resp, err := stream.Recv()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			break
+		}
+		others.ip = resp.Ip
+		others.x = resp.X
+		others.y = resp.Y
+		clients = append(clients, others)
 	}
-	//}()
-	//<-waitc
-	response.CloseSend()
+
+	log.Printf("finished")
+	fmt.Println(clients)
 }

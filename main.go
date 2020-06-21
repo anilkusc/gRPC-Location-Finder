@@ -1,7 +1,6 @@
 package main
 
 import (
-	"io"
 	"log"
 	"net"
 
@@ -10,28 +9,39 @@ import (
 	"google.golang.org/grpc"
 )
 
+type Client struct {
+	ip string
+	x  int32
+	y  int32
+}
+
+var myclients []Client
+
 type server struct{}
 
-func (s server) Deliver(stream pb.LocationDelivery_DeliverServer) error {
-	//waitc := make(chan struct{})
-	//go func() {
-	for {
-		in, err := stream.Recv()
-		if err == io.EOF {
-			log.Println("io failed")
-		}
-		if err != nil {
-			log.Println("Receiving failed")
-		}
-		ip := in.Ip
-		log.Println("Client ip is:", ip)
-		if err := stream.Send(&pb.Coordinates{Ip: ip}); err != nil {
-			log.Println("Sending failed")
-		}
+func (s server) Deliver(client *pb.Client, stream pb.LocationDelivery_DeliverServer) error {
 
+	//for {
+
+	var myclient Client
+	myclient.ip = client.GetIp()
+	myclient.x = client.GetX()
+	myclient.y = client.GetY()
+	log.Printf("Client info will be added ip,x,y: %s , %d , %d \n", myclient.ip, myclient.x, myclient.y)
+	if myclients == nil {
+		myclients = append(myclients, myclient)
+	} else {
+		Sync(myclient)
 	}
-	//}()
-	//<-waitc
+	for _, oneclient := range myclients {
+
+		if err := stream.Send(&pb.Client{Ip: oneclient.ip, X: oneclient.x, Y: oneclient.y}); err != nil {
+			log.Printf("send error %v", err)
+			continue
+		}
+	}
+	log.Printf("sended")
+	//}
 	return nil
 }
 

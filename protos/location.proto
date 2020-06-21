@@ -1,15 +1,16 @@
 syntax = "proto3";
 package v1;
 
-message Coordinates {
+message Client {
   string ip = 1;
   int32 x = 2;
   int32 y = 3;
-  
 }
+
 
 service LocationDelivery {
 
-    rpc Deliver (stream Coordinates) returns (stream Coordinates) {}
+    rpc Deliver (Client) returns (stream Client) {}
 
 }
+//protoc --go_out=plugins=grpc:./ api/api.proto
